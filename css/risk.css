@@ -1,0 +1,21 @@
+/* Water-at-Risk page (risk.html) - extends app.css tokens */
+.r-why{padding-block:8px 8px}
+.r-layers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.r-layer{display:flex;gap:12px;align-items:flex-start;background:var(--surface);border:1px solid var(--rule);border-radius:6px;padding:14px 16px}
+.r-layer h3{font-size:17px;margin-bottom:4px}
+.r-layer p{font-size:13.5px;color:var(--ink-2)}
+.r-n{flex:none;width:28px;height:28px;border-radius:50%;background:var(--ink);color:var(--surface);display:grid;place-items:center;font:600 14px var(--f-mono)}
+.r-moat{margin-top:14px;font-size:14px}
+.l-alt{background:var(--surface-2)}
+.r-ctl{align-items:flex-start;gap:14px 22px}
+.r-hint{font-size:11.5px;color:var(--muted)}
+.slider input[type=range]{width:100%;accent-color:var(--copper)}
+.kpis.k2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.kpi .v.crit{color:var(--crit-ink)} .kpi .v.good{color:var(--good-ink)}
+#tip{position:fixed;z-index:50;pointer-events:none;background:var(--ink);color:var(--surface);font-size:12.5px;line-height:1.4;padding:8px 10px;border-radius:5px;max-width:280px;opacity:0;transition:opacity .12s}
+#tip.on{opacity:1}
+#tip .tt{font-weight:600;margin-bottom:2px}
+#tip .tv{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.tbl-wrap td.r,.tbl-wrap th.r{text-align:right;font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+tr.best td{background:color-mix(in srgb,var(--good) 8%,transparent)}
+@media (max-width:860px){.r-layers{grid-template-columns:1fr}.kpis.k2{grid-template-columns:1fr 1fr}}

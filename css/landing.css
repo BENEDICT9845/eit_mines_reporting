@@ -1,0 +1,61 @@
+/* Landing page */
+.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
+.topbar .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:12px}
+.brand{display:inline-flex;align-items:center;gap:8px;font:700 18px var(--f-display);color:var(--ink);text-decoration:none}
+.brand svg{width:20px;height:20px;color:var(--q1)}
+.toplinks{display:flex;align-items:center;gap:18px}
+.toplinks a:not(.btn){color:var(--ink-2);text-decoration:none;font-size:14px}
+.toplinks a:not(.btn):hover{color:var(--ink)}
+.btn.ghost{background:transparent}
+.btn.light{background:var(--surface);color:var(--ink);border-color:var(--surface)}
+
+.l-hero{padding-block:64px 56px;background:
+  radial-gradient(circle at 85% 20%, color-mix(in srgb,var(--q2) 14%,transparent), transparent 45%),
+  radial-gradient(circle at 10% 90%, color-mix(in srgb,var(--copper) 10%,transparent), transparent 40%)}
+.l-hero .wrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:48px;align-items:center}
+.l-hero h1{font-size:clamp(38px,5.2vw,62px);font-weight:700;line-height:1.02;letter-spacing:-.02em}
+.l-hero h1 em{font-style:normal;color:var(--copper-ink)}
+.l-hero .lede{margin-top:16px;font-size:18px;max-width:52ch;color:var(--ink-2)}
+.l-cta{margin-top:26px;gap:12px}
+
+.l-preview{background:var(--surface);border:1px solid var(--rule-2);border-radius:12px;box-shadow:0 24px 60px -30px rgba(20,29,28,.35);overflow:hidden;transform:rotate(-1deg)}
+.pv-head{display:flex;align-items:center;gap:6px;padding:10px 14px;border-bottom:1px solid var(--rule);background:var(--surface-2)}
+.pv-dot{width:9px;height:9px;border-radius:50%;background:var(--rule-2)}
+.pv-title{margin-left:8px;font:500 12px var(--f-mono);color:var(--ink-2)}
+.pv-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule)}
+.pv-kpis>div{background:var(--surface);padding:14px 16px}
+.pv-v{font:600 26px/1 var(--f-display);font-variant-numeric:tabular-nums}
+.pv-bad{color:var(--crit-ink)}
+.pv-l{font-size:12px;color:var(--ink-2);margin-top:4px}
+.pv-chart{display:block;width:100%;height:auto;padding:16px 18px 6px}
+.pv-foot{display:flex;gap:8px;padding:0 18px 16px}
+
+.l-band{background:var(--ink);color:var(--surface);padding-block:36px}
+.l-problems{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
+.l-prob svg{width:34px;height:34px;color:var(--q3)}
+.l-prob h3{margin-top:10px;font-size:19px;color:var(--surface)}
+.l-prob p{margin-top:6px;color:color-mix(in srgb,var(--surface) 75%,transparent);font-size:14.5px}
+
+.l-section-head h2{margin-top:6px;font-size:clamp(26px,3.4vw,38px)}
+.l-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;position:relative}
+.l-steps li{display:flex;flex-direction:column;gap:12px;background:var(--surface);border:1px solid var(--rule);border-radius:10px;padding:22px}
+.l-steps .num{display:inline-grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--q1);color:#fff;font:700 18px var(--f-display)}
+.l-steps p{margin-top:6px;color:var(--ink-2);font-size:14.5px}
+
+.l-alt{background:var(--surface-2);border-block:1px solid var(--rule)}
+.l-answers{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.l-q{background:var(--surface);border:1px solid var(--rule);border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:8px}
+.l-q h3{font-size:17px}
+.l-q p{color:var(--ink-2);font-size:14px}
+.l-q .tag{align-self:flex-start}
+
+.l-final{background:var(--q1);color:#fff;padding-block:40px}
+.l-final .wrap{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.l-final h2{color:#fff;margin-top:4px}
+.l-final p{margin-top:8px;max-width:56ch;color:rgba(255,255,255,.85)}
+.l-final .eyebrow{color:rgba(255,255,255,.7)}
+
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .l-final{background:#1d3f6e}}
+:root[data-theme="dark"] .l-final{background:#1d3f6e}
+@media (max-width:900px){.l-hero .wrap,.l-problems,.l-steps{grid-template-columns:1fr}.l-answers{grid-template-columns:repeat(2,minmax(0,1fr))}.l-preview{transform:none}.toplinks a:not(.btn){display:none}}
+@media (max-width:520px){.l-answers{grid-template-columns:1fr}}

@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MineWater Ledger · Story</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="css/app.css">
+<link rel="stylesheet" href="css/landing.css">
+<style>
+.ch{min-height:calc(100vh - 58px);padding-block:44px 56px;border-bottom:1px solid var(--rule);scroll-margin-top:58px}
+.ch:nth-child(even){background:var(--surface)}
+.ch-no{font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--copper-ink)}
+.ch h2{font-size:clamp(28px,3.8vw,44px);margin-top:6px;max-width:26ch}
+.ch .lede{font-size:18px;color:var(--ink-2);max-width:62ch;margin-top:12px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:28px}
+.grid2{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:24px;margin-top:28px;align-items:start}
+.card{background:var(--surface);border:1px solid var(--rule-2);border-radius:12px;padding:18px 20px}
+.ch:nth-child(even) .card{background:var(--bg)}
+.big{font:700 clamp(34px,4.4vw,52px)/1 var(--f-display);color:var(--ink);letter-spacing:-.02em}
+.big.bad{color:var(--crit-ink)} .big.cu{color:var(--copper-ink)}
+.card p{color:var(--ink-2);margin-top:8px}
+.src{font-family:var(--f-mono);font-size:11px;color:var(--muted);margin-top:10px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.chip{border:1px solid var(--rule-2);border-radius:999px;padding:5px 12px;font-size:13.5px;background:var(--surface)}
+.chip b{font-family:var(--f-mono);font-weight:500;color:var(--copper-ink);margin-right:6px}
+.tag{display:inline-block;font:500 11px var(--f-mono);letter-spacing:.04em;text-transform:uppercase;padding:2px 8px;border-radius:5px}
+.t-real{background:color-mix(in srgb,var(--good) 16%,transparent);color:var(--good-ink)}
+.t-built{background:color-mix(in srgb,var(--q2) 18%,transparent);color:var(--q1)}
+.t-ass{background:color-mix(in srgb,var(--warn) 22%,transparent);color:var(--warn-ink)}
+.t-bet{background:color-mix(in srgb,var(--copper) 18%,transparent);color:var(--copper-ink)}
+.ctl{display:flex;align-items:center;gap:12px;margin-top:12px;font-size:14px;color:var(--ink-2);flex-wrap:wrap}
+.ctl input[type=range]{flex:1;min-width:160px;accent-color:var(--copper)}
+.ctl output{font-family:var(--f-mono);color:var(--ink);min-width:64px}
+svg text{font-family:var(--f-mono);font-size:11px;fill:var(--muted)}
+.tl{position:relative;margin-top:22px;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px}
+.tl::before{content:"";position:absolute;left:0;right:0;top:9px;height:2px;background:var(--rule-2)}
+.tl div{position:relative;padding-top:24px;font-size:13px;color:var(--ink-2)}
+.tl div::before{content:"";position:absolute;top:3px;left:0;width:14px;height:14px;border-radius:50%;background:var(--q1);border:3px solid var(--bg)}
+.tl div.fut::before{background:var(--copper)}
+.tl b{display:block;font-family:var(--f-mono);font-size:12px;color:var(--ink);font-weight:500}
+.bar{height:26px;border-radius:5px;display:flex;overflow:hidden;margin-top:6px;background:var(--surface-2)}
+.bar span{display:block;height:100%}
+.hatch{background:repeating-linear-gradient(45deg,var(--copper-soft) 0 4px,var(--crit) 4px 6px)}
+.mine{display:grid;grid-template-columns:86px 1fr 92px;gap:10px;align-items:center;margin-top:12px;font-size:13.5px}
+.mine .mono{text-align:right}
+.bad-ink{color:var(--crit-ink)}
+.pipe{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-top:26px}
+.pipe .card{padding:14px 15px;position:relative}
+.pipe .card h3{font-size:17px}
+.pipe .card .mono{font-size:11px;color:var(--copper-ink)}
+.pipe .card p{font-size:13.5px}
+.pipe .card:not(:last-child)::after{content:"→";position:absolute;right:-12px;top:40%;color:var(--muted);font-size:16px}
+.formula{font-family:var(--f-mono);font-size:13px;background:var(--surface-2);padding:10px 12px;border-radius:8px;margin-top:10px;overflow-x:auto}
+table.t{width:100%;border-collapse:collapse;margin-top:10px;font-size:14px}
+table.t td,table.t th{text-align:left;padding:8px 10px;border-bottom:1px solid var(--rule);vertical-align:top}
+table.t th{font:500 11px var(--f-mono);text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.links a{color:var(--q1)}
+.chnav{position:fixed;right:14px;top:50%;transform:translateY(-50%);z-index:20;display:flex;flex-direction:column;gap:6px}
+.chnav a{font-family:var(--f-mono);font-size:12px;width:28px;height:28px;display:grid;place-items:center;border-radius:50%;color:var(--ink-2);text-decoration:none;border:1px solid var(--rule-2);background:var(--bg)}
+.chnav a.on{border-color:var(--ink);background:var(--ink);color:var(--bg)}
+.toplinks a[aria-current="page"]{color:var(--ink);font-weight:600}
+.hint{font-size:12px;color:var(--muted);margin-top:8px}
+@media (max-width:900px){.grid3,.grid2,.pipe{grid-template-columns:1fr}.tl{grid-template-columns:repeat(2,1fr)}.tl::before{display:none}.chnav{display:none}.pipe .card::after{display:none}}
+</style>
+</head>
+<body class="landing-page">
+<nav class="topbar"><div class="wrap">
+  <a class="brand" href="index.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5c3.6 4.6 6.5 8.2 6.5 11.6A6.5 6.5 0 0 1 5.5 14.1C5.5 10.7 8.4 7.1 12 2.5z" fill="currentColor"/></svg>MineWater Ledger</a>
+  <div class="toplinks"><a href="foresight.html">Foresight</a><a href="dashboard.html">Company page</a><a href="risk.html">Water-at-Risk</a><a href="story.html" aria-current="page">Story</a></div>
+</div></nav>
+<div class="chnav" id="chnav" aria-label="Chapters"></div>
+
+<main id="story">
+
+<!-- 1 PROBLEM -->
+<section class="ch" id="problem" data-t="1 Problem"><div class="wrap">
+  <div class="ch-no">1 · The problem</div>
+  <h2>Nobody can say how much water each mine uses.</h2>
+  <p class="lede">Copper is the metal of the energy transition, and it runs on water. Mining companies report water as one company total, if at all. So buyers, banks, towns and researchers can't see which mine is at risk.</p>
+  <div class="grid3">
+    <div class="card"><div class="big cu">+18% vs +13%</div><p>Water use at copper mines grew faster than copper output, 2015–2019.</p><div class="src">Lutter et al. 2025, WU Wien · <span class="tag t-real">real</span></div></div>
+    <div class="card"><div class="big bad">&lt; 1 in 5</div><p>Only 97 of 507 copper mines report their own water. For the rest there is only a model estimate.</p><div class="src">Lutter et al. 2025 · <span class="tag t-real">real</span></div></div>
+    <div class="card"><div class="big">66%</div><p>of the world's ~12,000 mining sites face high water risk, yet few report how much water each site uses.</p><div class="src">ICMM, 22 Jul 2026 · <span class="tag t-real">real</span></div></div>
+  </div>
+  <h3 style="margin-top:32px">Who is affected</h3>
+  <div class="chips">
+    <span class="chip"><b>Buyers</b>battery makers and carmakers doing supply-chain due diligence</span>
+    <span class="chip"><b>Lenders</b>banks and investors pricing mine risk</span>
+    <span class="chip"><b>Communities</b>towns sharing a river basin with a mine</span>
+    <span class="chip"><b>Researchers</b>models with no real data to check against</span>
+  </div>
+  <div class="card" style="margin-top:18px;max-width:760px"><b>Oct 2019, Orange, Australia.</b> The town was on level 5 water restrictions. Cadia, the gold and copper mine next door, handed back ~2 of its ~30 million litres a day. <span class="src">Central Western Daily, 25 Oct 2019</span></div>
+</div></section>
+
+<!-- 2 MARKET -->
+<section class="ch" id="market" data-t="2 Why now"><div class="wrap">
+  <div class="ch-no">2 · Why the market is about to explode</div>
+  <h2>More copper, more water, and the rules are landing now.</h2>
+  <div class="grid2">
+    <div class="card">
+      <h3>Water used by copper mines, km³ per year</h3>
+      <svg id="trend" viewBox="0 0 620 260" role="img" aria-label="Projected new water use of copper mines"></svg>
+      <div class="ctl"><label for="g">Growth per year</label><input id="g" type="range" min="1" max="7" step="0.1" value="4.3"><output id="gv">4.3%</output></div>
+      <div class="hint">2019 level (2.95 km³, 448 mines) and the 4.3%/yr default come from Lutter et al. 2025 <span class="tag t-real">real</span>. The line beyond 2019 is a projection <span class="tag t-ass">assumed</span>.</div>
+    </div>
+    <div>
+      <div class="card"><h3>Trend</h3><p>The IEA expects a ~30% copper supply gap by 2035. Falling ore grades mean more rock and more water per tonne.</p></div>
+      <div class="card" style="margin-top:12px"><h3>Climate</h3><p>ICMM rates ~2/3 of mining facilities at high water risk. By 2034, ~2/3 of Chile's mining water is expected to come from the sea.</p></div>
+      <div class="card" style="margin-top:12px"><h3>Funding</h3><p>The EU Critical Raw Materials Act backs 47 strategic projects in the EU and 13 outside, and each one needs water data to get permits and finance.</p></div>
+    </div>
+  </div>
+  <h3 style="margin-top:30px">Why now: the regulation timeline</h3>
+  <div class="tl">
+    <div><b>2015–19</b>Water +18.3% vs output +12.8%</div>
+    <div><b>Jan 2026</b>GRI 14 mining standard applies</div>
+    <div><b>Jul 2026</b>ICMM: 66% of sites at high water risk</div>
+    <div class="fut"><b>Feb 2027</b>EU battery passport</div>
+    <div class="fut"><b>Aug 2027</b>EU battery due diligence</div>
+    <div class="fut"><b>FY2027</b>Revised ESRS (E3 water)</div>
+    <div class="fut"><b>2035</b>~30% copper supply gap</div>
+  </div>
+  <p class="hint">Battery due diligence covers cobalt, lithium, nickel and graphite today. Copper following is our bet <span class="tag t-bet">bet</span>.</p>
+</div></section>
+
+<!-- 3 DATA -->
+<section class="ch" id="data" data-t="3 Data"><div class="wrap">
+  <div class="ch-no">3 · Data we can explore</div>
+  <h2>We tested one real report. It doesn't add up.</h2>
+  <p class="lede">Two public files: Newcrest Mining's FY20 GRI data file (5 mines, 161 water values) and the WU Wien copper-mine dataset (Lutter et al. 2025). Every number below is recomputable from the report cells.</p>
+  <div class="grid3">
+    <div class="card">
+      <div class="ch-no">Finding 1</div><h3 style="margin-top:4px">The total hides the site</h3>
+      <div class="big cu" style="margin-top:10px">63%</div>
+      <p>of the company's 354,742 ML withdrawal is seawater at one mine, Lihir. A footnote says it isn't even used for ore processing.</p>
+      <div class="bar"><span style="width:63%;background:var(--s3)" title="Lihir seawater 222,149 ML"></span><span style="width:37%;background:var(--q2)" title="Everything else 132,593 ML"></span></div>
+      <div class="src">green = Lihir seawater · blue = everything else</div>
+    </div>
+    <div class="card">
+      <div class="ch-no">Finding 2</div><h3 style="margin-top:4px">Water in ≠ water out</h3>
+      <div id="balance"></div>
+      <div class="src">bar = water in; hatched = gap the report can't explain</div>
+    </div>
+    <div class="card">
+      <div class="ch-no">Finding 3</div><h3 style="margin-top:4px">A whole mine is missing</h3>
+      <div class="big bad" style="margin-top:10px">$185m · 0 ML</div>
+      <p>Red Chris (Canada) is in the revenue table and in no water table. The only figure is Lutter's model estimate: ~4,914 ML a year.</p>
+    </div>
+  </div>
+  <div class="row" style="margin-top:22px;gap:12px"><a class="btn primary big" href="dashboard.html">Explore it live: company page →</a></div>
+  <p class="hint">On the company page: Import data → "Use the example company's files". The table "Where these numbers come from" shows the sheet and row for every value.</p>
+</div></section>
+
+<!-- 4 TECH -->
+<section class="ch" id="tech" data-t="4 Tech"><div class="wrap">
+  <div class="ch-no">4 · How it works</div>
+  <h2>Parsing is step one. The engine decides which number to trust.</h2>
+  <div class="pipe">
+    <div class="card"><div class="mono">ingest.js</div><h3>1 Read</h3><p>Reads .xlsx and .csv in the browser with no library; tested on the Newcrest FY20 file. GRI 303 codes route each value to mine, flow, source and quality. Units in ML. Each value keeps its file, sheet and row. The company page import is a demo on the example files.</p></div>
+    <div class="card"><div class="mono">rules.js</div><h3>2 Check</h3><p>Water balance: withdrawal − discharge − Δstorage vs reported consumption. Over 5% is flagged. ICMM minimum checks and intensity per t ore, oz gold and US$m.</p></div>
+    <div class="card"><div class="mono">risk.js</div><h3>3 Reconcile</h3><p>Report, balance and WU Wien model, each with its own error bar, fused into one best estimate and a trust score.</p></div>
+    <div class="card"><div class="mono">risk.js</div><h3>4 Predict</h3><p>Seeded Monte Carlo, 1,000 futures per mine to 2030: demand, droughts, licence limits → chance of a short year, revenue at risk.</p></div>
+    <div class="card"><div class="mono">risk.js · sim.js</div><h3>5 Decide</h3><p>Prices fixes against the revenue they protect. sim.js runs reporting scenarios over all 447 WU Wien mines.</p></div>
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <h3>Try the reconciliation: Telfer, FY20</h3>
+      <svg id="recon" viewBox="0 0 620 200" role="img" aria-label="Three estimates of Telfer's water withdrawal and the reconciled value"></svg>
+      <div class="ctl"><label for="me">Model error bar</label><input id="me" type="range" min="10" max="60" step="1" value="35"><output id="mev">±35%</output></div>
+      <div class="ctl"><label><input id="ver" type="checkbox"> Site publishes a verified balance (report ±3%)</label></div>
+      <div class="formula">best = Σ(xᵢ / σᵢ²) / Σ(1 / σᵢ²) &nbsp;·&nbsp; σ_best = 1 / √Σ(1 / σᵢ²)</div>
+      <p class="hint">Inverse-variance weighting: a precise source counts more. Inputs are real (report 18,159 ML; balance-implied 21,826 ML; WU Wien model 17,744 ML); error bars are assumptions.</p>
+    </div>
+    <div class="card">
+      <h3>What's unique</h3>
+      <ul style="margin:10px 0 0;padding-left:18px;color:var(--ink-2)">
+        <li style="margin-bottom:8px"><b>Provenance on every number.</b> Each value links back to its file, sheet and row, and is labelled reported, balance-implied or modelled.</li>
+        <li style="margin-bottom:8px"><b>Reported and modelled data in one account.</b> Research models and company reports check each other, instead of living in separate worlds.</li>
+        <li style="margin-bottom:8px"><b>Data quality becomes money.</b> A verified Telfer balance cuts its bad-case loss from $315m to $148m. That's the value of better reporting.</li>
+        <li><b>Gets better with use.</b> Every reconciled report is new real data for the model, so estimates for mines that don't report get tighter.</li>
+      </ul>
+      <div class="row" style="margin-top:16px"><a class="btn primary" href="risk.html">Run it live: Water-at-Risk →</a></div>
+      <p class="hint">Infrastructure: static HTML/JS, no server, no build. Hosted on Netlify from GitHub, runs offline on localhost. Uploaded reports never leave the browser.</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- 5 FEASIBILITY -->
+<section class="ch" id="proof" data-t="5 Proof"><div class="wrap">
+  <div class="ch-no">5 · Evidence of feasibility</div>
+  <h2>What is proven today, and what is assumed.</h2>
+  <div class="grid2">
+    <div class="card">
+      <table class="t">
+        <tr><th style="width:120px">Status</th><th>What</th></tr>
+        <tr><td><span class="tag t-real">prior work</span></td><td>WU Wien model of copper-mine water use, 507 mines, R² 0.79 (Lutter et al. 2025). Standards the reader maps to: GRI 303, ICMM 2021, ESRS E3. Our site-level JSON schema and validator, prepared before the hackathon.</td></tr>
+        <tr><td><span class="tag t-real">real data</span></td><td>All site water, ore, gold and revenue figures from Newcrest FY20; WU Wien model values; the Orange/Cadia 2019 drought.</td></tr>
+        <tr><td><span class="tag t-built">built today</span></td><td>Company page, import (demo on the example files), code mapper, balance check, lineage table, CSV/PDF export, reconcile–predict–decide engine, this story page, Netlify deploy.</td></tr>
+        <tr><td><span class="tag t-ass">assumed</span></td><td>Error bars, demand growth, drought odds, licence headroom, fix costs, price per site, foresight rates. Every one is labelled and editable. The pilot replaces them with site data.</td></tr>
+      </table>
+    </div>
+    <div class="card links">
+      <h3>Links</h3>
+      <ul style="margin:10px 0 0;padding-left:18px;line-height:1.9">
+        <li><a href="https://github.com/BENEDICT9845/eit_mines_reporting">Code: github.com/BENEDICT9845/eit_mines_reporting</a></li>
+        <li><a href="https://research.wu.ac.at/en/publications/increasing-water-use-in-global-copper-production-threatens-freshw/">Lutter et al. 2025, Increasing water use in global copper production</a></li>
+        <li><a href="https://www.icmm.com/en-gb/guidance/environmental-stewardship/2021/water-reporting">ICMM Water Reporting guide (2021)</a></li>
+        <li><a href="https://www.globalreporting.org/">GRI 303: Water and Effluents</a></li>
+      </ul>
+      <h3 style="margin-top:18px">Main technical risks</h3>
+      <p>Workbook layouts differ between companies → map by disclosure code, not row. Definitions differ (cooling seawater: Cobre Panama 113,321 vs 581,900 ML) → keep flows separate. Which model values are reported vs modelled → confirm with WU Wien.</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- 6 BUSINESS -->
+<section class="ch" id="business" data-t="6 Pilot"><div class="wrap">
+  <div class="ch-no">6 · Who pays, and the pilot</div>
+  <h2>Buyers and lenders pay for site-level water they can trust.</h2>
+  <div class="grid2">
+    <div class="card">
+      <h3>Price hypothesis: €900 per monitored mine per year, paid by buyers and lenders <span class="tag t-ass">assumed</span></h3>
+      <div class="ctl"><label for="ns">Mines monitored</label><input id="ns" type="range" min="5" max="120" step="1" value="40"><output id="nsv">40</output></div>
+      <svg id="roi" viewBox="0 0 620 120" role="img" aria-label="Annual price versus reporting time saved"></svg>
+      <p class="hint">Free for mines. Time saved: a buyer's or lender's analyst goes from ~30 to ~4 hours per mine per year at €90/hour <span class="tag t-ass">assumed</span>. Market floor: ~12,000 ICMM sites × €900 ≈ €11m a year with one paying reader per site; every further buyer or bank adds to it.</p>
+    </div>
+    <div class="card">
+      <h3>90-day pilot with WU Wien</h3>
+      <table class="t">
+        <tr><td class="mono" style="width:90px">Days 1–30</td><td>Run every report in the WU Wien "Water and copper" folder through the reader.</td></tr>
+        <tr><td class="mono">Days 31–60</td><td>Reconcile against the model; flag each value reported or modelled, with an uncertainty.</td></tr>
+        <tr><td class="mono">Days 61–90</td><td>Release a validated site ledger, recalibrate the model, test the price with one battery maker or bank.</td></tr>
+      </table>
+      <p style="margin-top:14px"><b>Our ask:</b> the pilot with WU Wien, and one introduction to a battery maker or a bank.</p>
+    </div>
+  </div>
+</div></section>
+
+</main>
+
+<script>
+(function(){
+"use strict";
+const NS="http://www.w3.org/2000/svg", $=s=>document.querySelector(s);
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const el=(t,a,p)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;};
+const fmt=x=>Math.round(x).toLocaleString("en-US");
+
+/* chapter nav + arrow keys */
+const secs=[...document.querySelectorAll(".ch")], nav=$("#chnav");
+secs.forEach(s=>{const a=document.createElement("a");a.href="#"+s.id;a.textContent=s.dataset.t.split(" ")[0];a.title=s.dataset.t;nav.appendChild(a);});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){nav.querySelectorAll("a").forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#"+e.target.id));}}),{threshold:.5});
+secs.forEach(s=>io.observe(s));
+document.addEventListener("keydown",e=>{
+  if(e.target.tagName==="INPUT")return;
+  if(!["ArrowDown","ArrowUp","PageDown","PageUp","ArrowRight","ArrowLeft"].includes(e.key))return;
+  const y=window.scrollY+80; let i=secs.findIndex(s=>s.offsetTop+s.offsetHeight>y); if(i<0)i=secs.length-1;
+  const dir=["ArrowDown","PageDown","ArrowRight"].includes(e.key)?1:-1;
+  const n=secs[Math.max(0,Math.min(secs.length-1,i+dir))]; e.preventDefault(); n.scrollIntoView({behavior:"smooth"});
+});
+
+/* 2 trend */
+function trend(){
+  const g=+$("#g").value/100; $("#gv").textContent=(g*100).toFixed(1)+"%";
+  const svg=$("#trend"); svg.innerHTML="";
+  const W=620,H=260,L=44,R=20,T=16,B=30, x0=2019,x1=2036, ymax=10;
+  const X=y=>L+(y-x0)/(x1-x0)*(W-L-R), Y=v=>H-B-v/ymax*(H-T-B);
+  for(let v=0;v<=ymax;v+=2){el("line",{x1:L,x2:W-R,y1:Y(v),y2:Y(v),stroke:css("--grid")},svg);el("text",{x:L-8,y:Y(v)+4,"text-anchor":"end"},svg).textContent=v;}
+  [2019,2026,2028,2031,2036].forEach(y=>{el("text",{x:X(y),y:H-10,"text-anchor":"middle"},svg).textContent=y===2026?"now":y;});
+  el("rect",{x:L,y:T,width:X(2026)-L,height:H-T-B,fill:css("--surface-2"),opacity:.6},svg);
+  let d="",pts=[]; for(let y=x0;y<=x1;y++){const v=2.95*Math.pow(1+g,y-x0);pts.push([y,v]);d+=(y===x0?"M":"L")+X(y)+","+Y(Math.min(v,ymax));}
+  el("path",{d,fill:"none",stroke:css("--copper"),"stroke-width":3},svg);
+  [2026,2028,2031,2036].forEach(y=>{const v=2.95*Math.pow(1+g,y-x0);el("circle",{cx:X(y),cy:Y(Math.min(v,ymax)),r:4.5,fill:css("--copper")},svg);const t=el("text",{x:X(y),y:Y(Math.min(v,ymax))-10,"text-anchor":"middle",style:"fill:"+css("--ink")+";font-size:12px"},svg);t.textContent=v.toFixed(1);});
+  el("circle",{cx:X(2019),cy:Y(2.95),r:4.5,fill:css("--q1")},svg);
+  el("text",{x:X(2019)+8,y:Y(2.95)+16},svg).textContent="2.95 (2019, WU Wien)";
+}
+$("#g").addEventListener("input",trend);
+
+/* 3 balance bars */
+function balance(){
+  const rows=[["Lihir",314363,314363,"closes by construction"],["Telfer",18159,21826,"+20.2%"],["Cadia",14362,13694,"−8.0%"]];
+  $("#balance").innerHTML=rows.map(([n,i,o,lab])=>{
+    const m=Math.max(i,o), gap=Math.abs(o-i);
+    const wIn=i/m*100, wGap=o>i?gap/m*100:0;
+    return `<div class="mine"><span>${n}</span><div class="bar"><span style="width:${wIn}%;background:var(--q2)"></span><span class="hatch" style="width:${wGap}%"></span></div><span class="mono ${lab.startsWith("closes")?"":"bad-ink"}">${lab.startsWith("closes")?"by construction":lab}</span></div>`;
+  }).join("")+`<p style="margin-top:12px">0 of 3 checkable site balances close within 5%. Each bar is scaled to its own mine.</p>`;
+}
+
+/* 4 reconciliation */
+function recon(){
+  const me=+$("#me").value/100, ver=$("#ver").checked; $("#mev").textContent="±"+Math.round(me*100)+"%";
+  const src=[["Company report",18159,ver?0.03:0.10,css("--q2")],["Water balance",21826,0.10,css("--s3")],["WU Wien model",17744,me,css("--copper")]];
+  let sw=0,sx=0; src.forEach(([,x,p])=>{const s=p*x/1.96;sw+=1/(s*s);sx+=x/(s*s);});
+  const best=sx/sw, sb=1/Math.sqrt(sw), p95=1.96*sb;
+  const svg=$("#recon"); svg.innerHTML="";
+  const W=620,L=130,R=20, lo=5000, hi=32000, X=v=>L+(v-lo)/(hi-lo)*(W-L-R);
+  [10000,15000,20000,25000,30000].forEach(v=>{el("line",{x1:X(v),x2:X(v),y1:6,y2:172,stroke:css("--grid")},svg);el("text",{x:X(v),y:190,"text-anchor":"middle"},svg).textContent=fmt(v);});
+  const rows=[...src.map(([n,x,p,c])=>[n,x,p*x,c,false]),["Reconciled",best,p95,css("--ink"),true]];
+  rows.forEach(([n,x,e,c,b],k)=>{const y=24+k*40;
+    el("text",{x:L-10,y:y+4,"text-anchor":"end",style:b?"fill:"+css("--ink")+";font-weight:600":""},svg).textContent=n;
+    el("line",{x1:X(Math.max(lo,x-e)),x2:X(Math.min(hi,x+e)),y1:y,y2:y,stroke:c,"stroke-width":b?6:3,"stroke-linecap":"round",opacity:b?1:.7},svg);
+    el("circle",{cx:X(x),cy:y,r:b?7:5,fill:c},svg);
+    el("text",{x:X(Math.min(hi,x+e))+8,y:y+4,style:"fill:"+css("--ink")},svg).textContent=fmt(x)+" ML";
+  });
+}
+$("#me").addEventListener("input",recon); $("#ver").addEventListener("change",recon);
+
+/* 6 ROI */
+function roi(){
+  const n=+$("#ns").value; $("#nsv").textContent=n;
+  const price=900*n, saved=n*26*90;
+  const svg=$("#roi"); svg.innerHTML="";
+  const W=620,L=110,R=110,max=Math.max(price,saved)*1.05, X=v=>L+v/max*(W-L-R);
+  [["Price",price,css("--copper")],["Time saved",saved,css("--s3")]].forEach(([n2,v,c],k)=>{const y=18+k*48;
+    el("text",{x:L-10,y:y+20,"text-anchor":"end",style:"fill:"+css("--ink")},svg).textContent=n2;
+    el("rect",{x:L,y,width:X(v)-L,height:30,rx:5,fill:c},svg);
+    el("text",{x:X(v)+8,y:y+20,style:"fill:"+css("--ink")},svg).textContent="€"+fmt(v/1000)+"k";});
+  el("text",{x:W-4,y:112,"text-anchor":"end",style:"fill:"+css("--good-ink")+";font-size:12px"},svg).textContent=(saved/price).toFixed(1)+"× return";
+}
+$("#ns").addEventListener("input",roi);
+
+const all=()=>{trend();balance();recon();roi();};
+all(); matchMedia("(prefers-color-scheme: dark)").addEventListener("change",all);
+})();
+</script>
+</body>
+</html>

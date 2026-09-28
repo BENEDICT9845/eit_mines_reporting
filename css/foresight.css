@@ -1,0 +1,36 @@
+/* Market foresight canvas page */
+.fc-hero{padding-block:28px 10px}.fc-hero .wrap{grid-template-columns:1fr}
+.fc{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:16px;padding-block:10px 40px}
+.fc-box{background:var(--surface);border:1.5px solid var(--rule-2);border-radius:10px;padding:18px 20px;display:flex;flex-direction:column;gap:12px}
+.fc-1{grid-row:span 2}.fc-4{grid-column:1/-1}
+.fc-box h2{font-size:22px;display:flex;align-items:center;gap:10px}
+.fc-box h2 span{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--q1);color:#fff;font:700 15px var(--f-display)}
+.fc-box h3{font-size:15px;margin-bottom:8px}
+.fc-trend{font-size:15px;background:var(--surface-2);border-radius:6px;padding:10px 12px}
+.fc-q{font-size:13px;color:var(--muted);margin-top:-6px}
+.fc-charts{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:14px;align-items:start}
+.fc-svg{width:100%;height:auto;display:block}
+.fc-svg .g line{stroke:var(--grid)} .fc-svg text{fill:var(--muted);font:11px var(--f-mono)}
+.fc-svg .unit{fill:var(--ink-2)} .fc-svg .ms{stroke:var(--rule-2);stroke-dasharray:3 3} .fc-svg .mst{fill:var(--ink-2);font:11px var(--f-body)}
+.fc-svg .line{fill:none;stroke:var(--copper);stroke-width:3} .fc-svg .dot{fill:var(--ink)} .fc-svg .val{fill:var(--ink);font:600 12px var(--f-mono)}
+.fc-svg .xl{fill:var(--ink-2);font:600 11px var(--f-mono)} .fc-svg .exp{fill:none;stroke:var(--muted);stroke-width:2.5;stroke-dasharray:6 5} .fc-svg .des{fill:none;stroke:var(--good);stroke-width:3} .fc-svg .des-t{fill:var(--good-ink)}
+.fc-cap{font-size:12px;color:var(--muted);margin-top:4px}
+.k{display:inline-block;width:14px;height:3px;vertical-align:3px;margin-right:4px}.k.exp{background:var(--muted)}.k.des{background:var(--good)}
+.fc-sub{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.notes{display:flex;flex-wrap:wrap;gap:8px}
+.note{background:#2e7a4d;color:#fff;font-size:13px;line-height:1.35;padding:9px 11px;border-radius:3px;box-shadow:2px 3px 0 #215c39;flex:1 1 160px}
+.note small{display:block;font:600 10.5px var(--f-mono);text-transform:uppercase;letter-spacing:.06em;opacity:.8;margin-bottom:2px}
+.note.red{background:#a33b2c;box-shadow:2px 3px 0 #7a2a1f}
+.ms-list{list-style:none;margin:0;padding:0;display:grid;gap:7px}
+.ms-list li{display:grid;grid-template-columns:70px 1fr;gap:8px;font-size:13.5px;line-height:1.35}
+.ms-list b{font:600 12.5px var(--f-mono);color:var(--q1)} .ms-list li.exp{font-style:italic;color:var(--ink-2)}
+.fc-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.fc-steps>div{display:flex;flex-direction:column;gap:8px}
+.fc-steps b{font:600 14px var(--f-mono);color:var(--q1);border-bottom:2px solid var(--q1);padding-bottom:4px}
+.fc-steps .note{flex:none}
+@media (max-width:980px){.fc,.fc-charts,.fc-sub{grid-template-columns:1fr}.fc-1{grid-row:auto}.fc-steps{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.fc-steps{grid-template-columns:1fr}}
+.fc-charts{grid-template-columns:1fr}
+.fc-charts>div:nth-child(2){display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:14px;align-items:center;border-top:1px dashed var(--rule);padding-top:10px}
+.fc-hero h1{font-size:clamp(30px,4vw,44px)}
+@media (max-width:620px){.fc-charts>div:nth-child(2){grid-template-columns:1fr}}

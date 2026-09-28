@@ -29,3 +29,6 @@
 .l-section-head h2{max-width:28ch}
 @media (max-width:900px){.l-band .why{grid-template-columns:1fr 1fr}.who3,.proof3,.model3{grid-template-columns:1fr}.o-card{transform:none}}
 @media (max-width:520px){.l-band .why{grid-template-columns:1fr}}
+.l-band .why.why3{grid-template-columns:repeat(3,minmax(0,1fr));margin-top:0}
+@media (max-width:900px){.l-band .why.why3{grid-template-columns:1fr}}
+.outc>div{display:flex;flex-direction:column;gap:8px}.outc .tag{align-self:flex-start}.outc .m-v{font-size:34px}

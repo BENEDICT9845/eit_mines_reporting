@@ -19,20 +19,18 @@ function curSite() { const s = ST().SEL(); return s === "All" ? null : s; }
 /* ---------- generic header: company named only after data is loaded ---------- */
 function header() {
   const st = ST(), loaded = st.loaded();
-  $("#co-eyebrow").textContent = loaded ? "Company page · example company" : "Company page";
+  $("#co-eyebrow").textContent = loaded ? "Company page · example" : "Company page";
   $("#co-name").textContent = loaded ? "Newcrest Mining" : "Set up your company page";
   $("#co-lede").textContent = loaded
-    ? "Gold and copper miner, loaded as an example from public files. Your own reports fill the same page."
-    : "Add your company's water reports, one file per year, or type each mine's figures. Every mine then gets its own water account: what comes in, what goes out, whether it balances, and where it is heading.";
+    ? "Water in, water out and water risk for each mine, from its public reports."
+    : "Import your water reports and every mine gets its own water account.";
   const prof = $("#co-profile");
   if (loaded) {
-    const sites = st.sites(), withData = sites.filter(n => st.S[n].W != null).length;
-    prof.innerHTML = [["Mines", sites.length], ["With water data", withData], ["Countries", "PNG · Australia · Indonesia · Canada"], ["Metals", "gold, copper"], ["Years", "2016 – FY20"], ["Sources", "2 files"]]
-      .map(x => `<span><i>${x[0]}</i><b>${x[1]}</b></span>`).join("");
+    prof.innerHTML = [["Mines", st.sites().length], ["Years", "2016 – FY20"], ["Sources", "2 files"]].map(x => `<span><i>${x[0]}</i><b>${x[1]}</b></span>`).join("");
     prof.hidden = false;
   } else prof.hidden = true;
   $("#reg-co").textContent = loaded ? "Newcrest Mining (example)" : "–";
-  $("#reg-period").textContent = loaded ? "FY20 in full · history 2016–FY19" : "–";
+  $("#reg-period").textContent = loaded ? "FY20 · history 2016–FY19" : "–";
   $("#reg-src").textContent = loaded ? "Company report FY20 + WU Wien benchmark" : "–";
   $("#dl-row").hidden = !loaded; $("#filter-card").hidden = !loaded;
   document.title = (loaded ? "Newcrest (example) · " : "Company page · ") + "MineWater Ledger";
@@ -49,10 +47,11 @@ const LINEAGE = [
 ];
 function sources() {
   const h = $("#ov-sources"); if (!h) return;
-  h.innerHTML = `<div class="card stack"><div class="row" style="justify-content:space-between"><h3>Where these numbers come from</h3><span class="small">One company report gives FY20 in full. The history comes from inside that same file and from a public benchmark.</span></div>
+  h.innerHTML = `<details class="card stack"><summary>Where these numbers come from <span class="small" style="font-weight:400">· 1 company report + 1 public benchmark · <a href="#" id="go-codes">how the file is read</a></span></summary>
   <div class="tbl-wrap" style="border:0"><table><thead><tr><th>Source</th><th>Where in it</th><th>Years</th><th>What it gives</th><th class="r">Values</th></tr></thead><tbody>` +
     LINEAGE.map(r => `<tr class="${r[5] === "missing" ? "muted-row" : ""}"><td><span class="src-dot ${r[5]}"></span>${esc(r[0])}</td><td class="small">${esc(r[1])}</td><td class="mono">${esc(r[2])}</td><td>${esc(r[3])}</td><td class="r">${r[4]}</td></tr>`).join("") +
-    `</tbody></table></div></div>`;
+    `</tbody></table></div></details>`;
+  $("#go-codes").addEventListener("click", e => { e.preventDefault(); $("#t-codes").click(); });
 }
 
 /* ---------- water flows: one picture per mine ---------- */
@@ -107,7 +106,7 @@ function flows() {
   const st = ST(), host = $("#ov-flows"); if (!host) return;
   const sel = curSite(), list = st.sites();
   if (!sel) {
-    host.innerHTML = `<div class="card stack"><div class="row" style="justify-content:space-between"><h3>Each mine at a glance: water in → water out</h3><span class="small">Band width = volume. Hatched = water the report cannot account for. Click a mine to open it.</span></div><div class="flow-grid" id="flow-grid"></div></div>`;
+    host.innerHTML = `<div class="card stack"><div class="row" style="justify-content:space-between"><h3>Water in → water out, per mine</h3><span class="small">Hatched = water the report can&rsquo;t account for. Click a mine.</span></div><div class="flow-grid" id="flow-grid"></div></div>`;
     const g = $("#flow-grid");
     list.forEach(n => {
       const f = flowData(n), c = document.createElement("button"); c.className = "flow-card"; c.type = "button";

@@ -40,3 +40,10 @@
 .src-dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:7px;vertical-align:0}
 .src-dot.company{background:var(--q1)}.src-dot.benchmark{background:var(--q2)}.src-dot.missing{background:var(--rule-2)}
 tr.muted-row td{color:var(--muted)}
+/* v7 */
+.ctx-bar{display:none}
+#t-withdrawal,#t-outflows,#t-efficiency,#t-outlook,#t-codes{display:none}
+#ov-answers,#p-overview .card:has(#ov-findings),#p-overview .card:has(#ov-table){display:none}
+details.card>summary{cursor:pointer;font:600 15px var(--f-display);color:var(--ink);list-style:revert}
+details.card[open]>summary{margin-bottom:10px}
+.toplinks .btn{margin-left:4px}

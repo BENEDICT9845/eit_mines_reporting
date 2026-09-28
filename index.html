@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MineWater Ledger</title>
-<meta name="description" content="Water intelligence for mining: checks each mine's water account, predicts shortfalls, and puts a price on water risk for operators, buyers and lenders.">
+<meta name="description" content="Water intelligence for mining: a trusted water account per mine, the chance it runs short, and the revenue at risk.">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="css/app.css">
 <link rel="stylesheet" href="css/landing.css">
@@ -13,85 +13,60 @@
 <body class="landing-page">
 <nav class="topbar"><div class="wrap">
   <a class="brand" href="index.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5c3.6 4.6 6.5 8.2 6.5 11.6A6.5 6.5 0 0 1 5.5 14.1C5.5 10.7 8.4 7.1 12 2.5z" fill="currentColor"/></svg>MineWater Ledger</a>
-  <div class="toplinks"><a href="#who">Who it's for</a><a href="#how">How it works</a><a href="#model">Business model</a><a href="dashboard.html">Company page</a><a href="risk.html">Water-at-Risk</a><a class="btn primary" href="dashboard.html">See the example company</a></div>
+  <div class="toplinks"><a href="#outcomes">Outcomes</a><a href="#how">How it works</a><a class="btn primary" href="dashboard.html">Try the example</a></div>
 </div></nav>
 
 <header class="l-hero"><div class="wrap">
   <div class="l-copy">
-    <div class="eyebrow">Water intelligence for mining · operators, buyers, lenders</div>
+    <div class="eyebrow">Water intelligence for mining</div>
     <h1>Water is mining's next <em>supply risk</em>. We put a price on it.</h1>
-    <p class="lede">MineWater Ledger turns a mine's water report into three answers a business can act on: can we trust these numbers, how likely is this mine to run short of water, and how much revenue does that put at risk.</p>
-    <div class="row l-cta"><a class="btn primary big" href="dashboard.html">See the example company →</a><a class="btn big ghost" href="risk.html">See revenue at risk</a></div>
+    <p class="lede">One trusted water account per mine, the chance it runs short, and the revenue at stake.</p>
+    <div class="row l-cta"><a class="btn primary big" href="dashboard.html">Try the example company →</a></div>
   </div>
   <div class="l-preview o-card" aria-label="Example outcome">
-    <div class="pv-head"><span class="pv-dot"></span><span class="pv-dot"></span><span class="pv-dot"></span><span class="pv-title">Example: listed gold–copper miner · public FY20 data</span></div>
-    <div class="o-big"><div class="o-v">$401m</div><div class="o-l">revenue at risk from water shortfalls, 2021–2030, across 4 mines</div></div>
-    <div class="o-bars" role="img" aria-label="Expected revenue at risk by mine">
+    <div class="pv-head"><span class="pv-dot"></span><span class="pv-dot"></span><span class="pv-dot"></span><span class="pv-title">Example · gold–copper miner · public data</span></div>
+    <div class="o-big"><div class="o-v">$401m</div><div class="o-l">revenue at risk from water shortfalls to 2030</div></div>
+    <div class="o-bars" role="img" aria-label="Revenue at risk by mine">
       <div><span>Cadia</span><i style="width:100%"></i><b>$156m</b></div>
       <div><span>Telfer</span><i style="width:64%"></i><b>$100m</b></div>
       <div><span>Lihir</span><i style="width:56%"></i><b>$88m</b></div>
       <div><span>Red Chris</span><i style="width:37%"></i><b>$57m</b></div>
     </div>
-    <div class="pv-kpis">
-      <div><div class="pv-v pv-bad">2 of 3</div><div class="pv-l">mine water balances don't close</div></div>
-      <div><div class="pv-v">$125k</div><div class="pv-l">revenue per ML of freshwater at Cadia</div></div>
-      <div><div class="pv-v" style="color:var(--good-ink)">+$85m</div><div class="pv-l">net from one fix at Cadia</div></div>
-    </div>
-    <div class="pv-foot"><span class="pill good">Real company data</span><span class="pill info">Risk is simulated · assumptions shown</span></div>
+    <div class="pv-foot"><span class="pill info">Simulated on real company data</span></div>
   </div>
 </div></header>
 
 <section class="l-band"><div class="wrap">
-  <div class="eyebrow" style="color:rgba(255,255,255,.65)">Why now</div>
-  <div class="why">
-    <div><b>2027</b><p>EU battery due diligence (Aug) and the battery passport (Feb) make buyers answerable for risks in their supply chain.</p><small>Reg. (EU) 2023/1542, 2025/1561</small></div>
-    <div><b>~30%</b><p>Projected shortfall of copper supply against demand by 2035. New supply comes from drier, deeper mines.</p><small>IEA, Dec 2025</small></div>
-    <div><b>+18% vs +13%</b><p>Copper mines' water use grew faster than their output (2015–2019). Every tonne needs more water.</p><small>Lutter et al., WU Wien 2025</small></div>
-    <div><b>0</b><p>Water volumes in the industry's own dataset of ~12,000 facilities. Risk is mapped; usage is not.</p><small>ICMM, Jul 2026</small></div>
-  </div>
-</div></section>
-
-<section class="panel" id="who"><div class="wrap stack">
-  <div class="l-section-head"><div class="eyebrow">Who it's for · what they get</div><h2>One water account per mine, three kinds of value</h2></div>
-  <div class="who3">
-    <article><span class="tag built">Mining companies</span><h3>Protect production</h3><p>Know which mine runs short of water first, what that costs in lost output, and which fix pays back.</p><div class="who-proof"><b>Cadia:</b> cutting freshwater 10% protects ~$100m of revenue for ~$16m. <span class="small">simulated</span></div></article>
-    <article><span class="tag built">Buyers &amp; OEMs</span><h3>Pass EU due diligence with site data</h3><p>One checked water account per supplier mine instead of a questionnaire per buyer. Problems surface before the audit.</p><div class="who-proof"><b>Telfer:</b> reported water doesn't balance by 20%. A buyer sees it on day one.</div></article>
-    <article><span class="tag built">Lenders &amp; insurers</span><h3>A water number you can price</h3><p>Bad-case revenue at risk and a trust score per mine, instead of a country-level water-stress label.</p><div class="who-proof"><b>Better data, lower risk:</b> a verified ledger cuts Telfer's bad case from $315m to $148m. <span class="small">simulated</span></div></article>
-  </div>
-</div></section>
-
-<section class="panel l-alt" id="proof"><div class="wrap stack">
-  <div class="l-section-head"><div class="eyebrow">Proof on real data</div><h2>What one public report reveals in minutes</h2><p class="small" style="margin-top:6px">Example company: Newcrest Mining FY20 GRI data file, checked mine by mine.</p></div>
-  <div class="proof3">
-    <a class="proof" href="dashboard.html"><b class="pv-bad">+20%</b><h3>A water balance that doesn't close</h3><p>Telfer reports 3,667 ML more going out than coming in. Nobody flagged it.</p><span>Open the company page →</span></a>
-    <a class="proof" href="dashboard.html"><b>$185m</b><h3>Revenue from a mine with no water data</h3><p>Red Chris appears in the financials and in no water table. Only a model estimate exists.</p><span>Open the company page →</span></a>
-    <a class="proof" href="risk.html"><b>63%</b><h3>Seawater hidden in the headline number</h3><p>Most of the company's water total is seawater at one island mine, mixed in with desert groundwater.</p><span>See water-at-risk →</span></a>
+  <div class="why why3">
+    <div><b>2027</b><p>EU rules make battery makers answer for risks in their supply chain.</p></div>
+    <div><b>~30%</b><p>Copper supply short of demand by 2035 (IEA). New mines are drier.</p></div>
+    <div><b>0</b><p>Water volumes in the industry's own 12,000-site dataset (ICMM, 2026).</p></div>
   </div>
 </div></section>
 
 <section class="panel" id="how"><div class="wrap stack">
-  <div class="l-section-head"><div class="eyebrow">How it works</div><h2>Reconcile → predict → decide</h2></div>
+  <div class="l-section-head"><div class="eyebrow">How it works</div><h2>Check. Predict. Decide.</h2></div>
   <ol class="l-steps">
-    <li><span class="num">1</span><div><h3>Reconcile</h3><p>Reads the report by its disclosure codes, rebuilds each mine's water balance, and cross-checks it against WU Wien's satellite + machine-learning estimates. Output: one trusted number per mine.</p></div></li>
-    <li><span class="num">2</span><div><h3>Predict</h3><p>Simulates 1,000 futures per mine to 2030: demand growth, droughts, tighter licences. Output: the chance of a shortfall and the revenue at risk.</p></div></li>
-    <li><span class="num">3</span><div><h3>Decide</h3><p>Prices each fix (use less freshwater, secure a new source) against the risk it removes, and shows which one pays back first.</p></div></li>
+    <li><span class="num">1</span><div><h3>Check</h3><p>Import a water report. Every mine gets an account that has to add up.</p></div></li>
+    <li><span class="num">2</span><div><h3>Predict</h3><p>See which mine is likely to run short of water, and what it would cost.</p></div></li>
+    <li><span class="num">3</span><div><h3>Decide</h3><p>Compare fixes and see which one pays back first.</p></div></li>
   </ol>
-  <p class="note"><b>Why it gets harder to copy over time:</b> every report added becomes a checked mine account that sharpens the estimates for mines that don't report. The asset is the reconciled dataset, not the file reader.</p>
 </div></section>
 
-<section class="panel l-alt" id="model"><div class="wrap stack">
-  <div class="l-section-head"><div class="eyebrow">Business model</div><h2>Mines report for free. Buyers and lenders pay per mine they monitor.</h2></div>
-  <div class="model3">
-    <div><div class="m-v">€900</div><div class="m-l">per monitored mine per year</div><p>Price hypothesis for the pilot. A battery maker checking 40 supplier mines saves about €94k a year in analyst time, 2.6× the price.</p></div>
-    <div><div class="m-v">€1.4m → €32m</div><div class="m-l">yearly revenue potential</div><p>From 507 copper mines × 3 paying buyers each, to ~12,000 mining and metals facilities at the same price. Assumptions, to test in the pilot.</p></div>
-    <div><div class="m-v">90 days</div><div class="m-l">pilot</div><p>3 mines with public reports, 1 EU battery or cable buyer, WU Wien validating estimates against measured data. Go / no-go on price at day 90.</p></div>
+<section class="panel l-alt" id="outcomes"><div class="wrap stack">
+  <div class="l-section-head"><div class="eyebrow">What it delivers</div><h2>Outcomes you can put a number on</h2></div>
+  <div class="model3 outc">
+    <div><span class="tag built">Mines</span><div class="m-v" style="color:var(--good-ink)">+$85m</div><p>Net gain from one water fix at Cadia to 2030, after its cost.</p></div>
+    <div><span class="tag built">Buyers</span><div class="m-v" style="color:var(--crit-ink)">+20%</div><p>Telfer's water account doesn't add up. Flagged on import, before any audit.</p></div>
+    <div><span class="tag built">Lenders</span><div class="m-v">$315m → $148m</div><p>Telfer's bad-case risk once its water data is verified.</p></div>
   </div>
+  <p class="small">Free for mines. Buyers and lenders pay per mine they monitor. Money figures are simulated on the example company's public data.</p>
 </div></section>
 
 <section class="l-final"><div class="wrap">
-  <div><div class="eyebrow">See it on a real company</div><h2>Five mines, three continents, one page</h2><p>Open the example company page, import its public report, and follow each mine's water from source to outflow, then to revenue at risk.</p></div>
-  <a class="btn big light" href="dashboard.html">See the example company →</a>
+  <div><h2>See it on a real mining company</h2><p>Five mines, one public report, one page.</p></div>
+  <a class="btn big light" href="dashboard.html">Try the example →</a>
 </div></section>
-<footer><div class="wrap">Built at the EIT Water Hackathon, Munich, 28 Sep 2026 · Example data: Newcrest Mining 2020 GRI data file · Lutter, Maus, Luckeneder &amp; Tost (2025) · ICMM (2021, 2026) · IEA (2025) · Revenue-at-risk figures are simulations from stated assumptions, not forecasts of company results.</div></footer>
+<footer><div class="wrap">Built at the EIT Water Hackathon, Munich, 2026 · Example data: Newcrest Mining 2020 GRI report, Lutter et al. 2025 (WU Wien) · Revenue at risk is a simulation, not a forecast.</div></footer>
 </body>
 </html>

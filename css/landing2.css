@@ -1,0 +1,31 @@
+/* Landing v2: outcome-first sections */
+.o-card{transform:rotate(-.6deg)}
+.o-big{padding:16px 18px 6px}
+.o-v{font:700 44px/1 var(--f-display);color:var(--crit-ink);font-variant-numeric:tabular-nums}
+.o-l{font-size:13px;color:var(--ink-2);margin-top:6px;max-width:40ch}
+.o-bars{display:flex;flex-direction:column;gap:6px;padding:10px 18px 14px}
+.o-bars div{display:grid;grid-template-columns:70px 1fr 52px;gap:8px;align-items:center;font-size:12.5px}
+.o-bars i{display:block;height:10px;border-radius:0 3px 3px 0;background:var(--copper)}
+.o-bars b{font:500 12px var(--f-mono);text-align:right}
+.l-band .why{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;margin-top:12px}
+.why b{display:block;font:700 30px/1.05 var(--f-display);color:#fff}
+.why p{margin-top:8px;font-size:14px;color:color-mix(in srgb,var(--surface) 80%,transparent)}
+.why small{display:block;margin-top:8px;font:11px var(--f-mono);color:color-mix(in srgb,var(--surface) 55%,transparent)}
+.who3,.proof3,.model3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.who3 article{background:var(--surface);border:1px solid var(--rule);border-radius:10px;padding:20px;display:flex;flex-direction:column;gap:10px}
+.who3 .tag{align-self:flex-start}
+.who3 h3{font-size:20px}
+.who3 p{color:var(--ink-2);font-size:14.5px}
+.who-proof{margin-top:auto;font-size:13.5px;background:var(--surface-2);border-radius:6px;padding:10px 12px}
+.proof{display:flex;flex-direction:column;gap:6px;background:var(--surface);border:1px solid var(--rule);border-radius:10px;padding:20px;color:var(--ink);text-decoration:none}
+.proof:hover{border-color:var(--ink)}
+.proof>b{font:700 36px/1 var(--f-display);font-variant-numeric:tabular-nums}
+.proof p{color:var(--ink-2);font-size:14px}
+.proof span{margin-top:auto;padding-top:6px;font-size:13px;color:var(--copper-ink);font-weight:500}
+.model3>div{background:var(--surface);border:1px solid var(--rule);border-radius:10px;padding:20px}
+.m-v{font:700 30px/1 var(--f-display);font-variant-numeric:tabular-nums}
+.m-l{font:12px var(--f-mono);text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-top:6px}
+.model3 p{margin-top:10px;color:var(--ink-2);font-size:14px}
+.l-section-head h2{max-width:28ch}
+@media (max-width:900px){.l-band .why{grid-template-columns:1fr 1fr}.who3,.proof3,.model3{grid-template-columns:1fr}.o-card{transform:none}}
+@media (max-width:520px){.l-band .why{grid-template-columns:1fr}}

@@ -102,6 +102,45 @@ function drawFlow(host, f, big) {
   };
   side(f.L, xL, true); side(f.R, xR, false);
 }
+/* ---------- ICMM site water balance: how water moves through one mine ---------- */
+function drawCycle(host, f) {
+  const s = f.s, W = 960, H = 400, G = svgRoot(host, W, H, `${f.n}: ICMM site water balance`);
+  const d = el("defs", {}, G), m = el("marker", { id: "ar", viewBox: "0 0 10 10", refX: 9, refY: 5, markerWidth: 12, markerHeight: 12, markerUnits: "userSpaceOnUse", orient: "auto-start-reverse" }, d);
+  el("path", { d: "M0,0 L10,5 L0,10 z", fill: "var(--ink-2)" }, m);
+  const vmax = Math.max(s.W || 0, (s.W || 0) + (s.R || 0)), sw = v => v == null ? 2 : Math.max(2, Math.min(22, 22 * Math.sqrt(v / vmax)));
+  const box = (x, y, w, h, title, val, sub, tone) => {
+    el("rect", { x, y, width: w, height: h, rx: 10, fill: tone === "none" ? "var(--surface-2)" : "var(--surface)", stroke: tone === "main" ? "var(--ink)" : "var(--rule-2)", "stroke-width": tone === "main" ? 2 : 1.2, "stroke-dasharray": tone === "none" ? "5 4" : "" }, G);
+    txt(G, x + 14, y + 24, title, "t-ink");
+    const t = txt(G, x + 14, y + 52, val, val === "not reported" ? "t-muted" : "t-ink t-mono"); t.setAttribute("style", val === "not reported" ? "font-size:16px" : "font-size:22px;font-weight:600");
+    (sub || []).forEach((line, i) => txt(G, x + 14, y + 74 + i * 16, line, "t-muted"));
+  };
+  const line = (x1, y1, x2, y2, v, col) => el("path", { d: `M${x1},${y1} C${(x1 + x2) / 2},${y1} ${(x1 + x2) / 2},${y2} ${x2},${y2}`, fill: "none", stroke: col || "var(--q2)", "stroke-width": sw(v), opacity: .55, "marker-end": "url(#ar)" }, G);
+  // sources
+  const src = f.L.filter(x => !x.hatch && x.label !== "Drawn from storage").sort((a, b) => b.v - a.v).slice(0, 3).map(x => `${x.label} ${fmt(x.v)}`);
+  box(20, 130, 220, 130, "Water in (withdrawal)", fmt(s.W) + " ML", src);
+  const use = (s.W || 0) + (s.R || 0), times = s.W ? use / s.W : null;
+  box(360, 120, 250, 150, "Used in operations", fmt(use) + " ML", ["ore processing, dust control, camp", s.R ? `each litre used ${fmt(times, 1)}×` : "reuse not reported"], "main");
+  line(240, 195, 356, 195, s.W, "var(--q2)");
+  // reuse loop
+  if (s.R) {
+    el("path", { d: "M560,120 C560,40 410,40 410,116", fill: "none", stroke: "var(--good)", "stroke-width": sw(s.R), opacity: .5, "marker-end": "url(#ar)" }, G);
+    const t = txt(G, 485, 38, `Reused / recycled ${fmt(s.R)} ML`, "t-ink", "middle"); t.setAttribute("style", "font-weight:600");
+  }
+  const known = s.D != null && s.C != null;
+  box(730, 30, 210, 100, "Consumed", known ? fmt(s.C) + " ML" : "not reported", ["evaporation, tailings, product"], known ? "" : "none");
+  box(730, 150, 210, 100, "Discharged", known ? fmt(s.D) + " ML" : "not reported", ["back to rivers, ground, sea"], known ? "" : "none");
+  box(730, 270, 210, 100, "Storage change", s.dS != null ? (s.dS > 0 ? "+" : "") + fmt(s.dS) + " ML" : "not reported", ["dams and ponds, net"], s.dS != null ? "" : "none");
+  line(610, 170, 726, 80, s.C, "var(--copper)"); line(610, 200, 726, 200, s.D, "var(--ink-2)"); if (s.dS != null) line(610, 230, 726, 320, Math.abs(s.dS), "var(--q3)");
+  // balance badge
+  const g = f.gap, ok = f.status[0] === "good", warn = f.status[0] === "warn";
+  const msg = g == null ? "Balance can't be checked: outflows not reported" : ok ? "In = out + storage: the account adds up" : warn ? "Adds up only because consumption was set to in − out" : `Doesn't add up: ${fmt(Math.abs(g))} ML ${g < 0 ? "more going out than coming in" : "unaccounted for"}`;
+  const col = g == null ? "var(--ink-2)" : ok ? "var(--good-ink)" : warn ? "var(--warn-ink)" : "var(--crit-ink)";
+  el("rect", { x: 330, y: 300, width: 310, height: 58, rx: 8, fill: "var(--surface-2)", stroke: col }, G);
+  const lines = msg.length > 44 ? [msg.slice(0, msg.lastIndexOf(" ", 44)), msg.slice(msg.lastIndexOf(" ", 44) + 1)] : [msg];
+  lines.forEach((l, i) => { const t = txt(G, 485, 325 + i * 18 - (lines.length - 1) * 6, l, "", "middle"); t.setAttribute("style", `fill:${col};font-weight:600`); });
+  txt(G, 20, H - 8, "Structure follows the ICMM (2021) site water balance: withdrawal → operational use ↺ reuse → consumption, discharge, storage change.", "t-muted");
+}
+
 function flows() {
   const st = ST(), host = $("#ov-flows"); if (!host) return;
   const sel = curSite(), list = st.sites();
@@ -117,8 +156,8 @@ function flows() {
     });
   } else {
     const f = flowData(sel);
-    host.innerHTML = `<div class="card stack"><div class="row" style="justify-content:space-between"><h3>${esc(sel)}: where the water comes from and where it goes</h3>${f ? `<span class="pill ${f.status[0]}">${f.status[1]}</span>` : ""}</div><div class="chart" id="flow-big"></div>${f ? `<div class="fc-nums big"><span>Water in <b>${fmt(f.s.W)}</b> ML</span><span>Water out <b>${f.s.D != null && f.s.C != null ? fmt(f.s.D + f.s.C) : "–"}</b> ML</span><span>Storage change <b>${f.s.dS != null ? fmt(f.s.dS) : "not reported"}</b></span><span>Reused inside the site <b>${f.s.R != null ? fmt(f.s.R) + " ML" : "not reported"}</b></span></div>` : ""}<p class="small">See this mine over the years on <a href="#" id="go-years">Years &amp; output</a>, and its cost on <a href="#" id="go-cost">Water cost</a>.</p></div>`;
-    if (f) drawFlow($("#flow-big"), f, true); else $("#flow-big").innerHTML = `<p class="small">${esc(sel)} reports no water figures. Enter them by hand, or see the model estimate on Years &amp; output.</p>`;
+    host.innerHTML = `<div class="card stack"><div class="row" style="justify-content:space-between"><h3>${esc(sel)}: how water moves through the mine</h3>${f ? `<span class="pill ${f.status[0]}">${f.status[1]}</span>` : ""}</div><div class="chart" id="flow-big"></div>${f ? `<div class="fc-nums big"><span>Water in <b>${fmt(f.s.W)}</b> ML</span><span>Water out <b>${f.s.D != null && f.s.C != null ? fmt(f.s.D + f.s.C) : "–"}</b> ML</span><span>Storage change <b>${f.s.dS != null ? fmt(f.s.dS) : "not reported"}</b></span><span>Reused inside the site <b>${f.s.R != null ? fmt(f.s.R) + " ML" : "not reported"}</b></span></div>` : ""}<p class="small">See this mine over the years on <a href="#" id="go-years">Years &amp; output</a>, and its cost on <a href="#" id="go-cost">Water cost</a>.</p></div>`;
+    if (f) drawCycle($("#flow-big"), f); else $("#flow-big").innerHTML = `<p class="small">${esc(sel)} reports no water figures. Enter them by hand, or see the model estimate on Years &amp; output.</p>`;
     $("#go-years").addEventListener("click", e => { e.preventDefault(); $("#t-years").click(); });
     $("#go-cost").addEventListener("click", e => { e.preventDefault(); $("#t-cost").click(); });
   }
